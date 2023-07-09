@@ -1,0 +1,291 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "PMIFAPI",
+        "description": "PMIFAPI",
+        "contact": {
+            "email": "tigerdigital.tech@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Obtenez tous les produits pour PMIFAPI",
+                "description": "Les valeurs multiples peuvent être fournies avec une chaîne séparée par virgule",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "opération réussie"
+                    },
+                    "400": {
+                        "description": "Valeur(s) non valide(s)"
+                    }
+                }
+            }
+        },
+        "/api/product/add": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Créer un nouveau produit",
+                "description": "Créer un nouveau produit avec les données fournies",
+                "operationId": "store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Product Title"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Product Description"
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": 100
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "example": "Country"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "example": "City"
+                                    },
+                                    "district": {
+                                        "type": "string",
+                                        "example": "District"
+                                    },
+                                    "surface_area": {
+                                        "type": "integer",
+                                        "example": 100
+                                    },
+                                    "image": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary",
+                                            "example": "image1.jpg"
+                                        }
+                                    },
+                                    "no_rooms": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "no_bedrooms": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "no_bathrooms": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "no_garages": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "appartement"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "vente"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Produit créé avec succès"
+                    },
+                    "400": {
+                        "description": "Données non valides fournies"
+                    }
+                }
+            }
+        },
+        "/api/product/{id}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Obtenir les détails du produit",
+                "description": "Obtenez les détails d'un produit spécifique par son identifiant",
+                "operationId": "getDetail",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Opération réussie"
+                    },
+                    "404": {
+                        "description": "Produit non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/product/update/{id}": {
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Mettre à jour un produit",
+                "description": "Mettez à jour un produit existant avec les données fournies",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Product Title Updated"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Product Description Updated"
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": "200"
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "example": "CountryUpdated"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "example": "CityUpdated"
+                                    },
+                                    "district": {
+                                        "type": "string",
+                                        "example": "DistrictUpdated"
+                                    },
+                                    "surface_area": {
+                                        "type": "integer",
+                                        "example": "200"
+                                    },
+                                    "image": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "imageupdated.jpg"
+                                        }
+                                    },
+                                    "no_rooms": {
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "no_bedrooms": {
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "no_bathrooms": {
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "no_garages": {
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "villa"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "location"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Produit mis a jour avec succès"
+                    },
+                    "400": {
+                        "description": "Données non valides fournies"
+                    },
+                    "404": {
+                        "description": "Produit non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/product/remove/{id}": {
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Supprimer un produit",
+                "description": "Supprimer un produit existant par son identifiant",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produit supprimé avec succès"
+                    },
+                    "404": {
+                        "description": "Produit non trouvé"
+                    }
+                }
+            }
+        }
+    }
+}
